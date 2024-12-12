@@ -1,5 +1,11 @@
-const Register = () => {
+import { useContext } from "react";
+import { AuthContext } from "../context/Context";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
+const Register = () => {
+      const {registerUser, updateUser} = useContext(AuthContext)
+      const navigate = useNavigate()
 
     const registerHandler =(e)=>{
         e.preventDefault()
@@ -9,7 +15,21 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        console.log(name, imgPath, email, password)
+        registerUser(email, password)
+        .then(()=>{
+            updateUser(name, imgPath)
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Registration Success",
+                showConfirmButton: false,
+                timer: 1500
+              });
+              navigate('/')
+        })
+        .catch(err=>{
+            console.log(err.message)
+        })
     }
 
   return (
