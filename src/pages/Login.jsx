@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/Context";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 
 const Login = () => {
    const {logInUser} = useContext(AuthContext)
    const navigate = useNavigate()
+   const {state} = useLocation()
 
     const loginHandler= e =>{
         e.preventDefault()
@@ -23,7 +24,12 @@ const Login = () => {
                 showConfirmButton: false,
                 timer: 1500
               });
-              navigate('/')
+              if(state){
+                navigate(state)
+              }
+              else{
+                navigate('/')
+              }
         })
     }
 

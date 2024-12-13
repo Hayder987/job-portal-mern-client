@@ -1,8 +1,9 @@
+import { Link } from "react-router";
 
 
 const Card = ({job}) => {
 
-    const {title, location, jobType, category, applicationDeadline, salaryRange,
+    const {_id, title, location, jobType, category, applicationDeadline, salaryRange,
         description, company, requirements, company_logo
     } = job || {}
     return (
@@ -31,7 +32,7 @@ const Card = ({job}) => {
                 <span className="text-xl text-blue-600 font-semibold">{salaryRange.min} - {salaryRange.max}</span>
                 <span className="">/{salaryRange.currency}</span>
             </h3>
-            <button className="py-2 px-4 rounded-lg bg-blue-600 text-white font-medium">Apply</button>
+              <Link to={`/application/${_id}`}><button className="py-2 px-4 rounded-lg bg-blue-600 text-white font-medium">Apply</button></Link>
            </div>
         </div>
     );
