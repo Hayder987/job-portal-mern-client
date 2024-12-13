@@ -9,7 +9,7 @@ const Home = () => {
     const [allJobs, setAllJobs] = useState([])
 
     useEffect(()=>{
-        axios.get(`http://localhost:4000/alljobs`)
+        axios.get(`http://localhost:4000/recentJobs`)
         .then(result=>{
             setAllJobs(result.data)
         })

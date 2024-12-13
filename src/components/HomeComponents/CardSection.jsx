@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import Card from "./Card";
 
 
@@ -11,6 +12,9 @@ const CardSection = ({allJobs}) => {
                     <Card key={job._id} job={job}></Card>
                 ))
              }
+            </div>
+            <div className="flex justify-center mt-12">
+                <Link to='/alljobs'><button className="bg-blue-500 text-white py-3 px-6 rounded-lg">See All Jobs</button></Link>
             </div>
             
         </div>
