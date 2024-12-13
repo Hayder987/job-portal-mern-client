@@ -36,6 +36,9 @@ const NavBar = () => {
             <NavLink to="/alljobs">
               <li className="">All Jobs</li>
             </NavLink>
+            <NavLink to="/myapplication">
+              <li className="">My Application</li>
+            </NavLink>
           </ul>
         </div>
         {user ? (

@@ -2,36 +2,57 @@ import { useContext, useState } from "react";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../context/Context";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Appliction = () => {
   const { user } = useContext(AuthContext);
   const data = useLoaderData();
-  const {_id, title, jobType, category, company, company_logo} = data || {}
-  const date = new Date()
-  
-  const applicationDate = date.toISOString().split('T')[0]
+  const { _id, title, jobType, category, company, company_logo } = data || {};
+  const date = new Date();
 
-  const applictonHandler =(e)=>{
-    e.preventDefault()
-    const formData = new FormData(e.target)
-    const formValue =  Object.fromEntries(formData.entries());
-    const userName = user?.displayName
-    const email = user?.email
-    const jobsId = _id
+  const applicationDate = date.toISOString().split("T")[0];
 
-    const applicationData = {userName, email, jobsId, title, company_logo, jobType, category,applicationDate,
-         company ,...formValue}
+  const applictonHandler = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const formValue = Object.fromEntries(formData.entries());
+    const userName = user?.displayName;
+    const email = user?.email;
+    const jobsId = _id;
 
-     axios.post(`http://localhost:4000/application`,applicationData)
-     .then(result=>{
-        console.log(result)
-     })
-  }
+    const applicationData = {
+      userName,
+      email,
+      jobsId,
+      title,
+      company_logo,
+      jobType,
+      category,
+      applicationDate,
+      company,
+      ...formValue,
+    };
+
+    axios
+      .post(`http://localhost:4000/application`, applicationData)
+      .then(() => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your Application Done",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        e.target.reset()
+      });
+  };
 
   return (
     <div>
       <div className="md:max-w-[700px] mx-auto">
-        <h1 className="text-3xl font-semibold text-center my-6">Application for {data.title}</h1>
+        <h1 className="text-3xl font-semibold text-center my-6">
+          Application for {data.title}
+        </h1>
         <form onSubmit={applictonHandler} className="">
           <div className="form-control">
             <label className="label">
@@ -40,7 +61,7 @@ const Appliction = () => {
             <input
               type="url"
               placeholder="Github Url"
-              name='github'
+              name="github"
               className="input input-bordered"
               required
             />
@@ -52,7 +73,7 @@ const Appliction = () => {
             <input
               type="url"
               placeholder="Linkedin url"
-              name='linkedin'
+              name="linkedin"
               className="input input-bordered"
               required
             />
@@ -63,14 +84,18 @@ const Appliction = () => {
             </label>
             <input
               type="url"
-              name = "resume"
+              name="resume"
               placeholder="Resume url"
               className="input input-bordered"
               required
             />
           </div>
           <div className="flex justify-center py-8">
-            <input type="submit" value="Apply Now" className="bg-blue-500 py-3 px-6 text-white font-medium"/>
+            <input
+              type="submit"
+              value="Apply Now"
+              className="bg-blue-500 py-3 px-6 text-white font-medium"
+            />
           </div>
         </form>
       </div>
