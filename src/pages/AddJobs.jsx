@@ -2,11 +2,12 @@ import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../context/Context";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddJobs = () => {
   const [startDate, setStartDate] = useState(new Date());
-  const {user} = useContext(AuthContext)
-
+  const { user } = useContext(AuthContext);
 
   const formatDate = (date) => {
     return date ? date.toLocaleDateString("en-GB") : "";
@@ -15,16 +16,27 @@ const AddJobs = () => {
 
   const postFormHandler = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target)
+    const formData = new FormData(e.target);
     const initialValue = Object.fromEntries(formData.entries());
-    const {min, max, currency, requirements, responsibilities, ...newValue} = initialValue
-     newValue.salaryRange = {min, max, currency}
-     newValue.requirements = requirements.split('\n')
-     newValue.responsibilities = responsibilities.split('\n')
-     newValue.hr_email = user?.email
-     newValue.hr_name = user?.displayName
+    const { min, max, currency, requirements, responsibilities, ...newValue } =
+      initialValue;
+    newValue.salaryRange = { min, max, currency };
+    newValue.requirements = requirements.split("\n");
+    newValue.responsibilities = responsibilities.split("\n");
+    newValue.hr_email = user?.email;
+    newValue.hr_name = user?.displayName;
+    newValue.applicationDeadline = applicationDeadline;
 
-     console.log(newValue)
+    axios.post(`http://localhost:4000/alljobs`, newValue).then(() => {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Post Added SuccessFully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      e.target.reset()
+    });
   };
 
   return (
@@ -106,7 +118,7 @@ const AddJobs = () => {
               </label>
               <input
                 type="text"
-                placeholder="Location"
+                placeholder="Company"
                 name="company"
                 className="input input-bordered"
                 required
