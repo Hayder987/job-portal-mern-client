@@ -30,7 +30,9 @@ const MyPost = () => {
               <th>Category</th>
               <th>Job Type</th>
               <th>Deadline</th>
+              <th>All Candidate</th>
               <th>Action</th>
+              
             </tr>
           </thead>
           <tbody>
@@ -41,6 +43,7 @@ const MyPost = () => {
                 <td>{item.category}</td>
                 <td>{item.jobType}</td>
                 <td>{item.applicationDeadline}</td>
+                <td>{item.applicationCount}</td>
                 <td><button onClick={()=>navigate(`/applicant/${item._id}`)} className="text-blue-500 font-semibold">See Details</button></td>
               </tr>
             ))}
