@@ -9,7 +9,7 @@ const Home = () => {
     const [allJobs, setAllJobs] = useState([])
 
     useEffect(()=>{
-        axios.get(`http://localhost:4000/recentJobs`)
+        axios.get(`https://job-portal-server-opal.vercel.app/recentJobs`)
         .then(result=>{
             setAllJobs(result.data)
         })

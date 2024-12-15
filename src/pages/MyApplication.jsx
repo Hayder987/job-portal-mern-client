@@ -10,14 +10,14 @@ const MyApplication = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/myApplication?email=${user?.email}`)
+      .get(`https://job-portal-server-opal.vercel.app/myApplication?email=${user?.email}`)
       .then((result) => {
         setData(result.data);
       });
   }, [user?.email]);
 
   const deleteHandler = (id) => {
-    axios.delete(`http://localhost:4000/myApplication/${id}`).then(() => {
+    axios.delete(`https://job-portal-server-opal.vercel.app/myApplication/${id}`).then(() => {
       Swal.fire({
         position: "top-end",
         icon: "success",

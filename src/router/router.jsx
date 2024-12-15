@@ -23,7 +23,7 @@ export const router = createBrowserRouter([
             {path:'/applicant/:user_id', element:<PrivateRoute><ApplicantDetails></ApplicantDetails></PrivateRoute>},
             {path:'/mypost', element:<PrivateRoute><MyPost></MyPost></PrivateRoute>},
             {path:'/application/:id', element:<PrivateRoute><Appliction></Appliction></PrivateRoute>,
-                loader:({params})=> fetch(`http://localhost:4000/job?id=${params.id}`)
+                loader:({params})=> fetch(`https://job-portal-server-opal.vercel.app/job?id=${params.id}`)
             },
             {path:'/myapplication', element:<PrivateRoute><MyApplication></MyApplication></PrivateRoute>},
             {path:'/alljobs', element:<PrivateRoute><AllJobs></AllJobs></PrivateRoute>},

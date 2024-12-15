@@ -27,7 +27,7 @@ const AddJobs = () => {
     newValue.hr_name = user?.displayName;
     newValue.applicationDeadline = applicationDeadline;
 
-    axios.post(`http://localhost:4000/alljobs`, newValue).then(() => {
+    axios.post(`https://job-portal-server-opal.vercel.app/alljobs`, newValue).then(() => {
       Swal.fire({
         position: "top-end",
         icon: "success",

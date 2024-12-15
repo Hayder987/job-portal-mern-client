@@ -7,12 +7,12 @@ const AllJobs = () => {
   const [searchText, setSearchText] = useState("");
   useEffect(() => {
     if (searchText === "") {
-      axios.get(`http://localhost:4000/alljobs`).then((result) => {
+      axios.get(`https://job-portal-server-opal.vercel.app/alljobs`).then((result) => {
         setAllJobs(result.data);
       });
     } else {
       axios
-        .get(`http://localhost:4000/search?params=${searchText}`)
+        .get(`https://job-portal-server-opal.vercel.app/search?params=${searchText}`)
         .then((result) => {
           setAllJobs(result.data);
         });

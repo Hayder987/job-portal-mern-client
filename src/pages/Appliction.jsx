@@ -34,7 +34,7 @@ const Appliction = () => {
     };
 
     axios
-      .post(`http://localhost:4000/application`, applicationData)
+      .post(`https://job-portal-server-opal.vercel.app/application`, applicationData)
       .then(() => {
         Swal.fire({
           position: "top-end",

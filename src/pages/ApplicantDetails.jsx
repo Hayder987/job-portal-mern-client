@@ -10,7 +10,7 @@ const ApplicantDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/postapplicant?id=${user_id}`)
+      .get(`https://job-portal-server-opal.vercel.app/postapplicant?id=${user_id}`)
       .then((result) => {
         setAllData(result.data);
       });
@@ -20,7 +20,7 @@ const ApplicantDetails = () => {
     const body = {
         status: value
     }
-    axios.patch(`http://localhost:4000/candidate/${id}`, body) 
+    axios.patch(`https://job-portal-server-opal.vercel.app/candidate/${id}`, body) 
   }
 
   return (

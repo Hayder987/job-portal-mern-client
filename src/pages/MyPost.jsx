@@ -10,13 +10,13 @@ const MyPost = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/mypost?email=${user?.email}`)
+      .get(`https://job-portal-server-opal.vercel.app/mypost?email=${user?.email}`)
       .then((result) => {
         setData(result.data);
       });
   }, [user?.email]);
 
-  console.log(data);
+
 
   return (
     <div>
