@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/Context";
 import Swal from "sweetalert2";
 
+
 const NavBar = () => {
   const { user, signOutUser } = useContext(AuthContext);
   const navigate = useNavigate()

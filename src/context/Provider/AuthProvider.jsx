@@ -3,13 +3,12 @@ import { AuthContext } from "../Context";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import { auth } from "../../fireBase/fireBase.config";
 import axios from "axios";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
-    const axiousUrl = useAxiosSecure()
+
 
     const registerUser = (email, password)=>{
         setLoading(true)
@@ -29,6 +28,7 @@ const AuthProvider = ({children}) => {
     }
 
     const signOutUser =()=>{
+        setLoading(true)
         return signOut(auth)
     }
 
@@ -39,18 +39,30 @@ const AuthProvider = ({children}) => {
                 const user ={
                     email: currentUser.email
                 }
-                axiousUrl.post(`/jwt`, user)
+                axios.post(`http://localhost:4000/jwt`, user,{
+                    withCredentials:true
+                })
                 .then(res=>{
                     console.log(res.data)
+                    setLoading(false)
                 })
             }
-            setLoading(false)
+            else{
+                axios.post('http://localhost:4000/logout',{},{
+                    withCredentials:true
+                })
+                .then(res=>{
+                    console.log(res.data)
+                    setLoading(false)
+                })
+            }
+            
         })
 
         return ()=>{
             unSubscribe()
         }
-    },[axiousUrl])
+    },[])
 
 
 
