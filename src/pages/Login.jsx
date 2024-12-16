@@ -4,19 +4,22 @@ import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router";
 
 
+
 const Login = () => {
    const {logInUser} = useContext(AuthContext)
    const navigate = useNavigate()
    const {state} = useLocation()
 
-    const loginHandler= e =>{
+
+    const loginHandler=  e =>{
         e.preventDefault()
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
 
         logInUser(email, password)
-        .then(()=>{
+        .then(async()=>{
+         
             Swal.fire({
                 position: "top-end",
                 icon: "success",

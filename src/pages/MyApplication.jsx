@@ -3,18 +3,19 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/Context";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const MyApplication = () => {
   const [data, setData] = useState([]);
   const { user } = useContext(AuthContext);
+  const axiousUrl = useAxiosSecure()
 
   useEffect(() => {
-    axios
-      .get(`https://job-portal-server-opal.vercel.app/myApplication?email=${user?.email}`)
+    axiousUrl.get(`/myApplication?email=${user?.email}`)
       .then((result) => {
         setData(result.data);
       });
-  }, [user?.email]);
+  }, [user?.email, axiousUrl]);
 
   const deleteHandler = (id) => {
     axios.delete(`https://job-portal-server-opal.vercel.app/myApplication/${id}`).then(() => {
